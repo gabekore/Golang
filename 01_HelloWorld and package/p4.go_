@@ -1,0 +1,7 @@
+package pac4
+
+import "fmt"
+
+func Fnc4() {
+	fmt.Println("Hello, p4 World!")
+}
