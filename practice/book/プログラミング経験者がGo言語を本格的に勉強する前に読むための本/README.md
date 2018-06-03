@@ -16,4 +16,5 @@ Amazonアンリミでも読めるし、購入しても280円なので気軽に�
 
 
 [プログラミング経験者がGo言語を本格的に勉強する前に読むための本 Kindle版](https://amzn.to/2LVMCu0)
+
 [![プログラミング経験者がGo言語を本格的に勉強する前に読むための本 Kindle版](https://images-fe.ssl-images-amazon.com/images/I/41hEUGro-sL.jpg)](https://amzn.to/2LVMCu0)
