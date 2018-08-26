@@ -5,6 +5,29 @@ import (
 )
 
 
+
+
+//##########################################################
+// 
+// ChitChatで出来ること
+// 
+// ・ユーザーがサインアップしてアカウント取得
+// ・ログイン
+// ・スレッド立ち上げ
+// ・返信
+// ・非登録メンバーはリードオンリー
+// 
+//##########################################################
+// 
+// データベースモデル
+// 
+// ・ユーザー
+// ・セッション
+// ・スレッド
+// ・ポスト
+// 
+//##########################################################
+
 //**********************************************************
 // 
 // エントリポイント
@@ -12,7 +35,14 @@ import (
 //**********************************************************
 func main() {
 	// マルチプレクサ生成
-	//		ふたつ以上の入力をひとつの信号として出力する機構で
+	//		ふたつ以上の入力をひとつの信号として出力する機構
+	// 
+	// ↑って書くと分かりづらい
+	// クライアントとやりとりする部分で、以下を担当する思えばいい
+	//   ・リクエスト受付
+	//       リクエスト内容により、URLに対応したハンドラに処理を渡す
+	//       MVCで言うところのControllerみたいなもんかな？
+	//   ・レスポンス送出
 	mux := http.NewServeMux()
 	
 	//----------------------------------------------------------
@@ -48,7 +78,7 @@ func main() {
 	mux.HandleFunc("/thread/new"    , newThread)		// route_thread.go
 	mux.HandleFunc("/thread/create" , createThread)		// route_thread.go
 	mux.HandleFunc("/thread/post"   , postThread)		// route_thread.go
-	mux.HandleFunc("thread/read"    , readThread)		// route_thread.go
+	mux.HandleFunc("/thread/read"   , readThread)		// route_thread.go
 	
 	server := &http.Server {
 		Addr    : "0.0.0.0:8080",
@@ -56,24 +86,4 @@ func main() {
 	}
 	
 	server.ListenAndServe()
-}
-
-
-//**********************************************************
-// 
-// ハンドラ関数
-// 
-// HTMLを生成してResponseWriterに書き出す
-// 
-//**********************************************************
-func index (w http.ResponseWriter, r *http.Request) {
-	files := []string{"templates/layout.html", "templates/navbar.html", "templates/index.html",}
-
-	templates := template.Must(template.ParseFiles(files...))
-
-	threads, err := data.Threads()
-	
-	if err == nil {
-		templates.ExecuteTemplate(w, "layout", threads)
-	}
 }
