@@ -35,6 +35,8 @@ func generateHTML(w http.ResponseWriter, data interface{}, filenames ...string) 
 	}
 	
 	templates := template.Must(template.ParseFiles(files...))
+	
+	// テンプレートのlayout.htmlを実行する
 	templates.ExecuteTemplate(w, "layout", data)
 
 }
